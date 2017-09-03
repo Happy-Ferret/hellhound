@@ -39,6 +39,9 @@ func TestGenerate(t *testing.T) {
 			if statErr != nil {
 				t.Fatalf("\t%s\tShould be able to get stats for cipher password file: %v", fail, statErr)
 			}
+			defer func() {
+				os.RemoveAll(cipherpwdFile)
+			}()
 
 			data, readErr := ioutil.ReadFile(cipherpwdFile)
 			if readErr != nil {
